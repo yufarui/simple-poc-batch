@@ -1,0 +1,18 @@
+server:
+  port: 80
+
+spring:
+  application:
+    name: pos-batch
+  batch:
+    job:
+      enabled: false
+  profiles:
+    include: log
+
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:poc;DB_CLOSE_DELAY=-1;MODE=MYSQL;DATABASE_TO_LOWER=TRUE
+    username: sa
+    password: sa
+    schema: classpath:/data/schema.sql

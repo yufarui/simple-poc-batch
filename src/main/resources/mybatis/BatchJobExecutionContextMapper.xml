@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.poc.dao.mapper.BatchJobExecutionContextMapper" >
+  <resultMap id="BaseResultMap" type="com.example.poc.dao.model.BatchJobExecutionContext" >
+    <id column="job_execution_id" property="jobExecutionId" jdbcType="BIGINT" />
+    <result column="short_context" property="shortContext" jdbcType="VARCHAR" />
+    <result column="serialized_context" property="serializedContext" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    job_execution_id, short_context, serialized_context
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.poc.dao.model.BatchJobExecutionContextExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from batch_job_execution_context
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from batch_job_execution_context
+    where job_execution_id = #{jobExecutionId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from batch_job_execution_context
+    where job_execution_id = #{jobExecutionId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.example.poc.dao.model.BatchJobExecutionContext" >
+    insert into batch_job_execution_context (job_execution_id, short_context, serialized_context
+      )
+    values (#{jobExecutionId,jdbcType=BIGINT}, #{shortContext,jdbcType=VARCHAR}, #{serializedContext,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.poc.dao.model.BatchJobExecutionContext" >
+    insert into batch_job_execution_context
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="jobExecutionId != null" >
+        job_execution_id,
+      </if>
+      <if test="shortContext != null" >
+        short_context,
+      </if>
+      <if test="serializedContext != null" >
+        serialized_context,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="jobExecutionId != null" >
+        #{jobExecutionId,jdbcType=BIGINT},
+      </if>
+      <if test="shortContext != null" >
+        #{shortContext,jdbcType=VARCHAR},
+      </if>
+      <if test="serializedContext != null" >
+        #{serializedContext,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.poc.dao.model.BatchJobExecutionContext" >
+    update batch_job_execution_context
+    <set >
+      <if test="shortContext != null" >
+        short_context = #{shortContext,jdbcType=VARCHAR},
+      </if>
+      <if test="serializedContext != null" >
+        serialized_context = #{serializedContext,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where job_execution_id = #{jobExecutionId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.poc.dao.model.BatchJobExecutionContext" >
+    update batch_job_execution_context
+    set short_context = #{shortContext,jdbcType=VARCHAR},
+      serialized_context = #{serializedContext,jdbcType=VARCHAR}
+    where job_execution_id = #{jobExecutionId,jdbcType=BIGINT}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="com.example.poc.dao.model.BatchJobExecutionContextExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from batch_job_execution_context
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

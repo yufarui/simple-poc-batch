@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>pos清算界面</title>
+    <link rel="stylesheet" href="../web/static/layui/css/layui.css">
+</head>
+<body>
+
+<!-- 你的HTML代码 -->
+<blockquote class="layui-elem-quote">从节点信息</blockquote>
+
+<table class="layui-hide" id="follower"></table>
+
+<script src="../web/static/layui/layui.js"></script>
+
+<script>
+layui.config({
+  base: '/web/static/js/'
+}); //加载入口
+</script>
+
+<script>
+//一般直接写在一个js文件中
+layui.use(['follower'], function(){
+  var follower = layui.follower;
+  follower.init();
+});
+</script>
+</body>
+</html>
